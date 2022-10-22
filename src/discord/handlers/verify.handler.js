@@ -10,9 +10,9 @@ async function onVerify(interaction) {
 
   const row = new ActionRowBuilder().addComponents(
     new ButtonBuilder()
-      .setCustomId("getVerifyWeb")
       .setLabel("Verify")
-      .setStyle(ButtonStyle.Primary)
+      .setURL("https://punkkubnft.xyz/")
+      .setStyle(ButtonStyle.Link)
   );
 
   if (interaction.commandName == "verify") {
