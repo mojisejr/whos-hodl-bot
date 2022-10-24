@@ -1,6 +1,7 @@
 const { ButtonStyle } = require("discord.js");
 const { ActionRowBuilder, ButtonBuilder } = require("@discordjs/builders");
 const verifyBox = require("../embeds/verify.embed");
+const config = require("../../constants/discord.config");
 
 async function onVerify(interaction) {
   if (!interaction.isChatInputCommand()) return;
@@ -11,7 +12,9 @@ async function onVerify(interaction) {
   const row = new ActionRowBuilder().addComponents(
     new ButtonBuilder()
       .setLabel("Verify")
-      .setURL("https://punkkubnft.xyz/")
+      .setURL(
+        `${config.verifyUrl}?discordId=${interaction.user.id}&guildId=${interaction.guildId}`
+      )
       .setStyle(ButtonStyle.Link)
   );
 
@@ -24,16 +27,6 @@ async function onVerify(interaction) {
   }
 }
 
-async function onVerifyButtonClicked(interaction) {
-  if (!interaction.isButton()) return;
-  if (!interaction.deferred) {
-    await interaction.deferReply();
-  }
-  console.log(interaction);
-  await interaction.editReply({ content: "CLICKED !" });
-}
-
 module.exports = {
   onVerify,
-  onVerifyButtonClicked,
 };

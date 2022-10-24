@@ -9,8 +9,3 @@ const {
 client.on(Events.InteractionCreate, async (interaction) =>
   onVerify(interaction)
 );
-
-//@NON: take the user to connect wallet on our web site
-client.on(Events.InteractionCreate, async (interaction) =>
-  onVerifyButtonClicked(interaction)
-);
