@@ -14,7 +14,7 @@ const client = new Client({ intents });
 client.once("ready", async () => onClientReady(plan.FREE));
 
 async function onClientReady(plan) {
-  console.log(`WHOsHODL [${plan} plan] discord client ready`);
+  console.log(`WHOsHODL [${plan} plan]: Discord client ready`);
 }
 
 //@NON: Login
