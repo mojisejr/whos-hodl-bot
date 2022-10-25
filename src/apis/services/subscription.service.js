@@ -1,4 +1,5 @@
 const Subscription = require("../../database/models/subscription.model");
+const config = require("../../constants/database.config");
 
 /**
  *
@@ -10,15 +11,17 @@ const Subscription = require("../../database/models/subscription.model");
  * @param {number} end
  * @param {bool} expired
  */
+
 const createNewSubscription = async (
   discordGuildId,
   ownerDiscordId,
   ownerWallet,
   planId,
-  start,
-  end,
-  expired
+  planPeriod,
+  start
 ) => {
+  //@NON: calcuate unixtime stamp of next ending period of the package
+  const end = start + planPeriod * config.day_in_sec;
   const [result, created] = await Subscription.findOrCreate({
     where: { discordGuildId },
     defaults: {
@@ -28,13 +31,14 @@ const createNewSubscription = async (
       planId,
       start,
       end,
-      expired,
+      //@NON: started with expired false
+      expired: false,
     },
   });
   if (created) {
-    throw new Error(`GuildId: ${discordGuildId} is already existed.`);
-  } else {
     return result;
+  } else {
+    throw new Error(`GuildId: ${discordGuildId} is already existed.`);
   }
 };
 
@@ -58,13 +62,14 @@ const getUnexpiredSubscriptions = async () => {
  */
 const getSubscriptionByGuildId = async (discordGuildId) => {
   const result = await Subscription.findOne({ where: { discordGuildId } });
+  return result;
 };
 /**
  *
  * @param {string} ownerDiscordId
  */
 const getSubscriptionsByDiscordId = async (ownerDiscordId) => {
-  const results = await Subscription.findOne({ where: ownerDiscordId });
+  const results = await Subscription.findAll({ where: { ownerDiscordId } });
   return results;
 };
 

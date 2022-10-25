@@ -6,7 +6,7 @@ class Plan extends Model {}
 Plan.init(
   {
     planId: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       allowNull: false,
       autoIncrement: true,
