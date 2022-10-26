@@ -29,8 +29,10 @@ const createNewProject = async (
   messages,
   website,
   facebook,
+  twitter,
   discordInviteLink,
-  etherscan
+  etherscan,
+  planId
 ) => {
   const [newProject, created] = await Project.findOrCreate({
     where: { discordGuildId },
@@ -46,8 +48,10 @@ const createNewProject = async (
       messages,
       website,
       facebook,
+      twitter,
       discordInviteLink,
       etherscan,
+      planId,
     },
   });
   if (created) {
@@ -60,6 +64,11 @@ const getAllProjects = async () => {
   return results;
 };
 
+const getProjectByGuild = async (discordGuildId) => {
+  const results = await Project.findOne({ where: { discordGuildId } });
+  return results;
+};
+
 const getProjectByNftAddress = async (nftAddress) => {
   const results = await Project.findOne({ where: { nftAddress } });
   return results;
@@ -67,6 +76,11 @@ const getProjectByNftAddress = async (nftAddress) => {
 
 const getProjectsByOwner = async (ownerDiscordId) => {
   const results = await Project.findAll({ where: { ownerDiscordId } });
+  return results;
+};
+
+const getProjectByPlan = async (planId) => {
+  const results = await Project.findAll({ where: planId });
   return results;
 };
 
@@ -81,8 +95,10 @@ const deleteProject = async (nftAddress) => {
 module.exports = {
   createNewProject,
   getAllProjects,
+  getProjectByGuild,
   getProjectByNftAddress,
   getProjectsByOwner,
+  getProjectByPlan,
   updateProject,
   deleteProject,
 };

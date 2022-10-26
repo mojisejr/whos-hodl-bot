@@ -176,6 +176,76 @@
           }
         }
       }
+    },
+    "/project": {
+      "get": {
+        "tags": ["Projects"],
+        "summary": "list all projects",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          }
+        }
+      }
+    },
+    "/holder": {
+      "get": {
+        "tags": ["Holders"],
+        "summary": "list all holders of all project",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Holder"
+            }
+          }
+        }
+      }
+    },
+    "/holder/{nftAddress}": {
+      "get": {
+        "tags": ["Holders"],
+        "summary": "list all holders of {nftAddress}",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Holders"
+            }
+          }
+        }
+      }
+    },
+    "/holder/{nftAddress}/{discordId}": {
+      "get": {
+        "tags": ["Holders"],
+        "summary": "get holder of specific nft",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Holder"
+            }
+          }
+        }
+      }
+    },
+    "/new": {
+      "post": {
+        "tags": ["Holders"],
+        "summary": "add new holder data",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Holder"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -291,6 +361,105 @@
     "Subscriptions": {
       "type": "array",
       "$ref": "#/definitions/Subscription"
+    },
+    "Project": {
+      "required": [],
+      "properties": {
+        "nftAddress": {
+          "type": "string",
+          "definition": "nft smart contract address",
+          "uniqueItems": true
+        },
+        "ownerDiscordId": {
+          "type": "string",
+          "definition": "project owner discord id"
+        },
+        "discordGuildId": {
+          "type": "string",
+          "definition": "guild discord id"
+        },
+        "ownerWalletAddress": {
+          "type": "string",
+          "definition": "project owner wallet address [evm]"
+        },
+        "projectName": {
+          "type": "string",
+          "definition": "nft project name"
+        },
+        "totalSupply": {
+          "type": "string",
+          "definition": "project total supply"
+        },
+        "symbol": {
+          "type": "string",
+          "definition": "nft project symbol"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "website": {
+          "type": "string",
+          "definition": "project website url"
+        },
+        "facebook": {
+          "type": "string",
+          "definition": "project facebook url"
+        },
+        "twitter": {
+          "type": "string",
+          "definition": "project twitter url"
+        },
+        "discordInviteLink": {
+          "type": "string",
+          "definition": "invitation link of project discord"
+        },
+        "etherscan": {
+          "type": "string",
+          "definition": "smart contract url on etherscan"
+        },
+        "planId": {
+          "type": "integer",
+          "definition": "plan id that this project is using"
+        }
+      }
+    },
+    "Holder": {
+      "required": [],
+      "properties": {
+        "nftAddress": {
+          "type": "string",
+          "definition": "nft smart contract address"
+        },
+        "discordId": {
+          "type": "string",
+          "definition": "holder discord Id"
+        },
+        "walletAddress": {
+          "type": "string",
+          "definition": "holder wallet address [evm]"
+        },
+        "timestamp": {
+          "type": "integer",
+          "definition": "verified timestamp [unix]"
+        },
+        "verified": {
+          "type": "boolean",
+          "definition": "verification status"
+        }
+      }
+    },
+    "Holders": {
+      "type": "array",
+      "$ref": "#/definitions/Holder"
     }
   },
   "host": "localhost:3000",

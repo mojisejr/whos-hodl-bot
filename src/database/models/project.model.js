@@ -36,11 +36,13 @@ Project.init(
       allowNull: true,
     },
     roles: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
+      // type: DataTypes.ARRAY(DataTypes.STRING),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     messages: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
+      // type: DataTypes.ARRAY(DataTypes.STRING),
+      type: DataTypes.STRING,
       allowNull: true,
     },
     website: {
@@ -51,6 +53,10 @@ Project.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    twitter: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     discordInviteLink: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -58,6 +64,10 @@ Project.init(
     etherscan: {
       type: DataTypes.STRING,
       allowNull: true,
+    },
+    planId: {
+      type: DataTypes.NUMBER,
+      allowNull: false,
     },
   },
   { sequelize }

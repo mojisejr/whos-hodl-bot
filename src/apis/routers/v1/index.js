@@ -3,6 +3,7 @@ const router = express.Router();
 
 const subscriptionRoutes = require("./subscription.routes");
 const projectsRoutes = require("./project.routes");
+const holderRoutes = require("./holder.routes");
 
 const defaultRoutes = [
   {
@@ -10,8 +11,12 @@ const defaultRoutes = [
     route: subscriptionRoutes,
   },
   {
-    path: "/projects",
+    path: "/project",
     route: projectsRoutes,
+  },
+  {
+    path: "/holder",
+    route: holderRoutes,
   },
 ];
 

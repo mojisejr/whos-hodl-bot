@@ -1,5 +1,16 @@
 const Holder = require("../../database/models/holder.model");
 
+/**
+ *
+ * @param {string} nftAddress
+ * @param {string} discordId
+ * @param {string} walletAddress
+ * @param {string} balance
+ * @param {number} timestamp
+ * @param {boolean} verified
+ * @returns
+ */
+
 const createNewHolder = async (
   nftAddress,
   discordId,
@@ -27,10 +38,16 @@ const createNewHolder = async (
   }
 };
 
-const getAllHolder = async () => {
+const getAllHolders = async () => {
   const results = await Holder.findAll();
   return results;
 };
+
+const getAllHoldersByNft = async (nftAddress) => {
+  const results = await Holder.findAll({ where: { nftAddres } });
+  return results;
+};
+
 const getHolder = async (discordId, nftAddress) => {
   const result = await Holder.findOne({ where: { discordId, nftAddress } });
   return result;
@@ -53,7 +70,8 @@ const deleteHolder = async (discordId, nftAddress) => {
 
 module.exports = {
   createNewHolder,
-  getAllHolder,
+  getAllHolders,
+  getAllHoldersByNft,
   getHolder,
   updateHolderBalance,
   updateVerifyStatus,
