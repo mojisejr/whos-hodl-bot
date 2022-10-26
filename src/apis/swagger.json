@@ -1,0 +1,307 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Whos-Hodl API",
+    "description": "Whos-Hodl Backend API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "paths": {
+    "/subscription/plan": {
+      "get": {
+        "tags": ["Plans"],
+        "summary": "Get all plans",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Plans"
+            }
+          }
+        }
+      }
+    },
+    "/subscription/plan/new": {
+      "post": {
+        "tags": ["Plans"],
+        "description": "create new plan",
+        "parameters": [
+          {
+            "name": "plan",
+            "description": "plan name",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/newPlan"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "new plan created",
+            "scheme": {
+              "$ref": "#/definitions/Plan"
+            }
+          }
+        }
+      }
+    },
+    "/subscription/plan/{planId}": {
+      "parameters": [
+        {
+          "name": "planId",
+          "in": "path",
+          "required": true,
+          "description": "plan ID",
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "tags": ["Plans"],
+        "summary": "Get Plan by ID",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Plan"
+            }
+          }
+        }
+      }
+    },
+    "/subscription/subscribe/": {
+      "get": {
+        "tags": ["Subscriptions"],
+        "summary": "Get subscriptions of all guild",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Subscriptions"
+            }
+          }
+        }
+      }
+    },
+    "/subscription/subscribe/guild/{discordGuildId}": {
+      "parameters": [
+        {
+          "name": "discordGuildId",
+          "required": true,
+          "in": "path",
+          "desctiption": "discord guild id of the nft server",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Subscriptions"],
+        "summary": "Guild subscription information",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Subscriptions"],
+        "summary": "update subscription plan",
+        "parameters": [
+          {
+            "name": "subscription",
+            "in": "body",
+            "description": "update subscription data",
+            "schema": {
+              "$ref": "#/definitions/UpdateSubscription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "updated subscription"
+          }
+        }
+      }
+    },
+    "/subscription/subscribe/owner/{ownerDiscordId}": {
+      "parameters": [
+        {
+          "name": "ownerDiscordId",
+          "in": "path",
+          "required": true,
+          "definition": "project owner discord Id",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Subscriptions"],
+        "summary:": "Subscriptions of disocrd Id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Subscriptions"
+            }
+          }
+        }
+      }
+    },
+    "/subscription/subscribe/new": {
+      "post": {
+        "tags": ["Subscriptions"],
+        "parameters": [
+          {
+            "name": "new subscription",
+            "in": "body",
+            "required": true,
+            "description": "add new subscription guild",
+            "schema": {
+              "$ref": "#/definitions/NewSubscription"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "new subscription created",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "newPlan": {
+      "required": ["planName", "period", "price"],
+      "properties": {
+        "planName": {
+          "type": "string",
+          "definition": "plan name"
+        },
+        "price": {
+          "type": "integer",
+          "definition": "plan price in USD eg. 19"
+        },
+        "period": {
+          "type": "integer",
+          "definition": "plan period in days eg. 30"
+        },
+        "description": {
+          "type": "string",
+          "definition": "plan descriptions"
+        }
+      }
+    },
+    "Plan": {
+      "required": ["planId"],
+      "properties": {
+        "planId": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "planName": {
+          "type": "string"
+        },
+        "price": {
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "Plans": {
+      "type": "array",
+      "$ref": "#/definitions/Plan"
+    },
+    "NewSubscription": {
+      "required": [
+        "discordGuildId",
+        "ownerDiscordId",
+        "ownerWalletId",
+        "planId",
+        "start"
+      ],
+      "properties": {
+        "discordGuildId": { "type": "string", "uniqueItems": true },
+        "ownerDiscordId": { "type": "string" },
+        "ownerWallet": { "type": "string" },
+        "planId": { "type": "integer" },
+        "start": { "type": "integer" }
+      }
+    },
+    "Subscription": {
+      "required": ["discordGuildId"],
+      "properties": {
+        "discordGuildId": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "ownerDiscordId": {
+          "type": "string"
+        },
+        "ownerWallet": {
+          "type": "string"
+        },
+        "planId": {
+          "type": "integer"
+        },
+        "start": {
+          "type": "integer"
+        },
+        "end": {
+          "type": "integer"
+        },
+        "expired": {
+          "type": "boolean"
+        }
+      }
+    },
+    "UpdateSubscription": {
+      "required": [],
+      "properties": {
+        "ownerDiscordId": {
+          "type": "string"
+        },
+        "ownerWalletId": {
+          "type": "string"
+        },
+        "planId": {
+          "type": "integer"
+        },
+        "start": {
+          "type": "integer"
+        },
+        "end": {
+          "type": "integer"
+        },
+        "expired": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Subscriptions": {
+      "type": "array",
+      "$ref": "#/definitions/Subscription"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/v1",
+  "tags": [
+    {
+      "name": "API",
+      "description": "Whos-Hodl Backend API"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "products": ["application/json"]
+}

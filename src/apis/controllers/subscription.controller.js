@@ -49,6 +49,19 @@ const addNewSubscription = catchAsync(async (req, res) => {
   }
 });
 
+const getSubscriptions = catchAsync(async (req, res) => {
+  const result = await getAllSubscription().catch((e) =>
+    res.status(403).json({
+      result: "Error",
+      message: e.message,
+    })
+  );
+  res.status(200).json({
+    result: "OK",
+    data: result,
+  });
+});
+
 const getSubscriptionByDiscordGuildId = catchAsync(async (req, res) => {
   const { discordGuildId } = req.params;
   const subscribe = await getSubscriptionByGuildId(discordGuildId).catch((e) =>
@@ -87,6 +100,7 @@ const updateSubscriptionStatus = catchAsync(async (req, res) => {
 
 module.exports = {
   addNewSubscription,
+  getSubscriptions,
   getSubscriptionByDiscordGuildId,
   getSubscriptionByOwnerDiscordId,
   updateSubscriptionStatus,

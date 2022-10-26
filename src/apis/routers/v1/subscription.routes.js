@@ -8,6 +8,7 @@ const {
 const {
   addNewSubscription,
   updateSubscriptionStatus,
+  getSubscriptions,
   getSubscriptionByDiscordGuildId,
   getSubscriptionByOwnerDiscordId,
 } = require("../../controllers/subscription.controller");
@@ -20,6 +21,7 @@ router.get("/plan/:planId", getPlan);
 router.post("/plan/new", addNewPlan);
 
 //@NON: Subscription routes
+router.get("/subscribe", getSubscriptions);
 router.get("/subscribe/guild/:discordGuildId", getSubscriptionByDiscordGuildId);
 router.put("/subscribe/guild/:discordGuildId", updateSubscriptionStatus);
 router.get("/subscribe/owner/:ownerDiscordId", getSubscriptionByOwnerDiscordId);
