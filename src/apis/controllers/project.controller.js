@@ -19,8 +19,6 @@ const {
  * @param {string} projectName
  * @param {number} totalSupply
  * @param {string} symbol
- * @param {Array(string)} roles
- * @param {Array(string)} messages
  * @param {string} website
  * @param {string} facebook
  * @param {string} twitter
@@ -37,8 +35,6 @@ const addNewProject = catchAsync(async (req, res) => {
     projectName,
     totalSupply,
     symbol,
-    roles,
-    messages,
     website,
     facebook,
     twitter,
@@ -54,8 +50,6 @@ const addNewProject = catchAsync(async (req, res) => {
     projectName,
     totalSupply,
     symbol,
-    roles,
-    messages,
     website,
     facebook,
     twitter,

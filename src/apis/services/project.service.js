@@ -9,8 +9,6 @@ const Project = require("../../database/models/project.model");
  * @param {string} projectName
  * @param {number} totalSupply
  * @param {string} symbol
- * @param {Array(string)} roles
- * @param {Array(string)} messages
  * @param {string} website
  * @param {string} facebook
  * @param {string} discordInviteLink
@@ -25,8 +23,6 @@ const createNewProject = async (
   projectName,
   totalSupply,
   symbol,
-  roles,
-  messages,
   website,
   facebook,
   twitter,
@@ -44,8 +40,6 @@ const createNewProject = async (
       projectName,
       totalSupply,
       symbol,
-      roles,
-      messages,
       website,
       facebook,
       twitter,

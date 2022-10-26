@@ -191,6 +191,115 @@
         }
       }
     },
+    "/project/nft/{nftAddress}": {
+      "parameters": [
+        {
+          "name": "nft smart contract address",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "tags": ["Projects"],
+        "summary": "list one project",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          }
+        }
+      }
+    },
+    "/project/owner/{ownerDisocrdId}": {
+      "parameters": [
+        {
+          "name": "project owner discord Id",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "tags": ["Projects"],
+        "summary": "list all products owned by this discordId",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Projects"
+            }
+          }
+        }
+      }
+    },
+    "/project/guild/{discordGuildId}": {
+      "parameters": [
+        {
+          "name": "guild discord id",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "tags": ["Projects"],
+        "summary": "list one project",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          }
+        }
+      }
+    },
+    "/project/plan/{planId}": {
+      "parameters": [
+        {
+          "name": "plan id",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "tags": ["Projects"],
+        "summary": "list all projects which has this plan",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          }
+        }
+      }
+    },
+    "/project/new": {
+      "post": {
+        "tags": ["Projects"],
+        "parameters": [
+          {
+            "name": "new project",
+            "in": "body",
+            "required": true,
+            "description": "add new subscription guild",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "new project created",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          }
+        }
+      }
+    },
     "/holder": {
       "get": {
         "tags": ["Holders"],
@@ -233,7 +342,54 @@
         }
       }
     },
-    "/new": {
+    "/holder/update/{nftAddress}/{discordId}": {
+      "parameters": [
+        {
+          "name": "nftAddress",
+          "in": "path",
+          "required": true,
+          "description": "nft smart contract address"
+        },
+        {
+          "name": "discordId",
+          "in": "path",
+          "required": true,
+          "description": "nft holder discord Id"
+        }
+      ],
+      "put": {
+        "tags": ["Holders"],
+        "summary": "update holder",
+        "parameters": [
+          {
+            "name": "holder",
+            "in": "body",
+            "required": true,
+            "description": "update holder data body",
+            "schema": {
+              "$ref": "#/definitions/Holder"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "updated holder"
+          }
+        }
+      }
+    },
+    "/holder/new": {
+      "parameters": [
+        {
+          "name": "new holder",
+          "in": "body",
+          "required": true,
+          "description": "add new holder of nft guild",
+          "schema": {
+            "$ref": "#/definitions/Holder"
+          }
+        }
+      ],
       "post": {
         "tags": ["Holders"],
         "summary": "add new holder data",
@@ -393,18 +549,6 @@
         "symbol": {
           "type": "string",
           "definition": "nft project symbol"
-        },
-        "roles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "messages": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         },
         "website": {
           "type": "string",
