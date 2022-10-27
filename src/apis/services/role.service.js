@@ -10,16 +10,16 @@ const Role = require("../../database/models/role.model");
 
 const createRole = async (discordGuildId, roleName, level) => {
   const [role, created] = await Role.findOrCreate({
-    where: { discordGuildId, roleName },
-    defaults: { discordGuildId, roleName, level },
+    where: { discordGuildId, role: roleName },
+    defaults: { discordGuildId, role: roleName, level },
   });
 
   if (created) {
+    return role;
+  } else {
     throw new Error(
       `${roleName} for guild id: ${discordGuildId} is already existed`
     );
-  } else {
-    return role;
   }
 };
 

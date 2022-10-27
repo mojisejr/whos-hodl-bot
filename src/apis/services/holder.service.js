@@ -32,9 +32,9 @@ const createNewHolder = async (
   });
 
   if (created) {
-    throw new Error(`${discordId} is been created for ${nftAddress} NFT.`);
-  } else {
     return newHolder;
+  } else {
+    throw new Error(`${discordId} is been created for ${nftAddress} NFT.`);
   }
 };
 

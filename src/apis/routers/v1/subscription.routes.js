@@ -13,6 +13,10 @@ const {
   getSubscriptionByOwnerDiscordId,
 } = require("../../controllers/subscription.controller");
 
+const {
+  createSubscription,
+} = require("../../controllers/aggregates/subscribe.controller");
+
 const router = express.Router();
 
 //@NON: Plan routes
@@ -22,6 +26,7 @@ router.post("/plan/new", addNewPlan);
 
 //@NON: Subscription routes
 router.get("/subscribe", getSubscriptions);
+router.post("/subscribe", createSubscription);
 router.get("/subscribe/guild/:discordGuildId", getSubscriptionByDiscordGuildId);
 router.put("/subscribe/guild/:discordGuildId", updateSubscriptionStatus);
 router.get("/subscribe/owner/:ownerDiscordId", getSubscriptionByOwnerDiscordId);

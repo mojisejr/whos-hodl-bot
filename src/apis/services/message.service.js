@@ -15,11 +15,11 @@ const createMessage = async (discordGuildId, newMessage, level) => {
   });
 
   if (created) {
+    return message;
+  } else {
     throw new Error(
       `${newMessage} for guild id: ${discordGuildId} is already existed`
     );
-  } else {
-    return message;
   }
 };
 

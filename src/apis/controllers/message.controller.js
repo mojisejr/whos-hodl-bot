@@ -16,17 +16,19 @@ const {
 
 const newMessage = catchAsync(async (req, res) => {
   const { discordGuildId, message, level } = req.body;
-  const result = await createMessage(discordGuildId, message, level).catch(
-    (e) =>
+  createMessage(discordGuildId, message, level)
+    .then((result) => {
+      res.staus(201).json({
+        result: "OK",
+        data: result,
+      });
+    })
+    .catch((e) =>
       res.status(403).json({
         result: "Error",
         message: e.message,
       })
-  );
-  res.staus(201).json({
-    result: "OK",
-    data: result,
-  });
+    );
 });
 
 const getAllMessages = catchAsync(async (req, res) => {

@@ -1,4 +1,7 @@
 const catchAsync = require("../utils/catchAcsync");
+const client = require("../../discord/discord.client");
+const discord = require("../../discord/handlers/role.handler");
+
 const {
   createRole,
   getRolesByGuildId,
@@ -15,17 +18,21 @@ const {
  */
 
 const newRole = catchAsync(async (req, res) => {
-  const { discordGuildId, roleName, level } = req.body;
-  const result = await createRole(discordGuildId, roleName, level).catch((e) =>
-    res.status(403).json({
-      result: "Error",
-      message: e.message,
+  const { discordGuildId, roleName, level, color } = req.body;
+
+  createRole(discordGuildId, roleName, level)
+    .then(async (response) => {
+      res.status(201).json({
+        result: "OK",
+        data: response,
+      });
     })
-  );
-  res.staus(201).json({
-    result: "OK",
-    data: result,
-  });
+    .catch((e) => {
+      res.status(403).json({
+        result: "Error",
+        message: e.message,
+      });
+    });
 });
 
 const getAllRoles = catchAsync(async (req, res) => {

@@ -8,7 +8,7 @@ const {
 
 const router = express.Router();
 
-//@NON: Project routes
+//@NON: message routes
 
 router.get("/:discordGuildId", getAllMessages);
 router.put("/:discordGuildId", updateMessageById);

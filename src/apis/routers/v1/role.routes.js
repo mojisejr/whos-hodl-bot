@@ -8,7 +8,7 @@ const {
 
 const router = express.Router();
 
-//@NON: Project routes
+//@NON: role routes
 
 router.get("/:discordGuildId", getAllRoles);
 router.put("/:discordGuildId", updateRoleById);
