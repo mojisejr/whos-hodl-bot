@@ -43,7 +43,7 @@ const createSubscription = catchAsync(async ({ params, body }, res) => {
   );
 
   //create subscription
-  await createNewSubscription(
+  const subscription = await createNewSubscription(
     discordGuildId,
     ownerDiscordId,
     ownerWalletAddress,
@@ -52,15 +52,37 @@ const createSubscription = catchAsync(async ({ params, body }, res) => {
     new Date().getTime()
   );
   //add role
+  const subResult = parseDataObject(subscription);
+  const projResult = parseDataObject(project);
+  const planResult = parseDataObject(plan);
+
+  const logs = {
+    ...projResult,
+    ...subResult,
+    ...planResult,
+  };
+
+  console.log(logs);
+
   await createRole(discordGuildId, roleName, 1);
   res.status(200).json({
     result: "OK",
-    data: {
-      ...project,
-      ...plan,
-    },
+    data: logs,
   });
 });
+
+const parseDataObject = (data) => {
+  let buffer = null;
+  const isArray = data.hasOwnProperty("length");
+  if (isArray) {
+    buffer = data.map((r) => {
+      return r.dataValues;
+    });
+  } else {
+    buffer = data.dataValues;
+  }
+  return buffer;
+};
 
 module.exports = {
   createSubscription,

@@ -85,6 +85,21 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": ["Subscriptions"],
+        "summary": "[MAIN] this api for user make subscription to the project",
+        "parameters": [
+          {
+            "name": "user subscription aggreagtes",
+            "in": "body",
+            "required": true,
+            "description": "user subscription data parameters",
+            "schema": {
+              "$ref": "#/definitions/UserSubscription"
+            }
+          }
+        ]
       }
     },
     "/subscription/subscribe/guild/{discordGuildId}": {
@@ -314,6 +329,23 @@
         }
       }
     },
+    "/holder/verify": {
+      "post": {
+        "tags": ["Holders"],
+        "summary": "[MAIN] this api used for Holder of any project to verify their right",
+        "parameters": [
+          {
+            "name": "verification data",
+            "in": "body",
+            "required": true,
+            "description": "verification data model",
+            "schema": {
+              "$ref": "#/definitions/HolderVerification"
+            }
+          }
+        ]
+      }
+    },
     "/holder/{nftAddress}": {
       "get": {
         "tags": ["Holders"],
@@ -447,6 +479,72 @@
     "Plans": {
       "type": "array",
       "$ref": "#/definitions/Plan"
+    },
+    "UserSubscription": {
+      "required": [
+        "planId",
+        "nftAddress",
+        "ownerDiscordId",
+        "discordGuildId",
+        "ownerWalletAddress",
+        "projectName",
+        "totalSupply",
+        "symbol",
+        "discordInviteLink",
+        "roleName"
+      ],
+      "properties": {
+        "nftAddress": {
+          "type": "string",
+          "uniqueItems": true,
+          "definition": "nft smart contract address"
+        },
+        "ownerDiscordId": {
+          "type": "string",
+          "definition": "owner discord id"
+        },
+        "discordGuildId": {
+          "type": "string",
+          "definition": "project discord id"
+        },
+        "ownerWalletAddress": {
+          "type": "string",
+          "definition": "owner wallet address [evm]"
+        },
+        "projectName": {
+          "type": "string",
+          "definition": "project name"
+        },
+        "totalSupply": {
+          "type": "string",
+          "definition": "nft total supply"
+        },
+        "symbol": {
+          "type": "string",
+          "definition": "nft symbol"
+        },
+        "website": {
+          "type": "string"
+        },
+        "facebook": {
+          "type": "string"
+        },
+        "twitter": {
+          "type": "string"
+        },
+        "discordInviteLink": {
+          "type": "string"
+        },
+        "etherscan": {
+          "type": "string"
+        },
+        "planId": {
+          "type": "string"
+        },
+        "roleName": {
+          "type": "string"
+        }
+      }
     },
     "NewSubscription": {
       "required": [
@@ -598,6 +696,20 @@
         "verified": {
           "type": "boolean",
           "definition": "verification status"
+        }
+      }
+    },
+    "HolderVerification": {
+      "required": ["walletAddress", "discordId", "discordGuildId"],
+      "properties": {
+        "walletAddress": {
+          "type": "string"
+        },
+        "discordId": {
+          "type": "string"
+        },
+        "discordGuildId": {
+          "type": "string"
         }
       }
     },
