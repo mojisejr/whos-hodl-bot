@@ -343,7 +343,16 @@
               "$ref": "#/definitions/HolderVerification"
             }
           }
-        ]
+        ],
+        "products": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResponseSubscription"
+            }
+          }
+        }
       }
     },
     "/holder/{nftAddress}": {
@@ -611,6 +620,10 @@
           "type": "boolean"
         }
       }
+    },
+
+    "ResponseSubscription": {
+      "perameters": {}
     },
     "Subscriptions": {
       "type": "array",
