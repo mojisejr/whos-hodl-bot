@@ -6,6 +6,8 @@ const {
   createNewSubscription,
 } = require("../../services/subscription.service");
 
+const { parseDataObject } = require("../../utils/parseSqliteObject");
+
 const createSubscription = catchAsync(async ({ params, body }, res) => {
   const {
     nftAddress,
@@ -62,7 +64,7 @@ const createSubscription = catchAsync(async ({ params, body }, res) => {
     ...planResult,
   };
 
-  console.log(logs);
+  console.log("subscribe logs", logs);
 
   await createRole(discordGuildId, roleName, 1);
   res.status(200).json({
@@ -70,19 +72,6 @@ const createSubscription = catchAsync(async ({ params, body }, res) => {
     data: logs,
   });
 });
-
-const parseDataObject = (data) => {
-  let buffer = null;
-  const isArray = data.hasOwnProperty("length");
-  if (isArray) {
-    buffer = data.map((r) => {
-      return r.dataValues;
-    });
-  } else {
-    buffer = data.dataValues;
-  }
-  return buffer;
-};
 
 module.exports = {
   createSubscription,

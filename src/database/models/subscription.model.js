@@ -15,7 +15,7 @@ Subscription.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    ownerWallet: {
+    ownerWalletAddress: {
       type: DataTypes.STRING,
       allowNull: false,
     },

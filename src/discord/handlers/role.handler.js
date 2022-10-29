@@ -23,7 +23,7 @@ const setRole = async (client, guildId, userId, roleName) => {
   const guild = client.guilds.cache.get(guildId);
   const member = await guild.members.fetch();
   const user = member.get(userId);
-  await user.roles.add(role);
+  await user.roles.add(roleName);
 };
 
 const removeRole = async (client, guildId, userId, roleName) => {

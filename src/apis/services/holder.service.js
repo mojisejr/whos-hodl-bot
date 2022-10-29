@@ -53,6 +53,11 @@ const getHolder = async (discordId, nftAddress) => {
   return result;
 };
 
+const getHolderByWallet = async (wallet, nftAddress) => {
+  const result = await Holder.findOne({ where: { discordId, nftAddress } });
+  return result;
+};
+
 const updateHolder = async (discordId, nftAddress, data) => {
   await Holder.update(data, { where: { discordId, nftAddress } });
 };
@@ -73,6 +78,7 @@ module.exports = {
   getAllHolders,
   getAllHoldersByNft,
   getHolder,
+  getHolderByWallet,
   updateHolderBalance,
   updateVerifyStatus,
   updateHolder,

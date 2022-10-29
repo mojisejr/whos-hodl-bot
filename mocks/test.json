@@ -1,0 +1,45 @@
+{
+  "planName": "Noob",
+  "price": 19,
+  "period": 30,
+  "description": "100 holders"
+}
+
+{
+    "discordGuildId": "964899859113078845",
+    "ownerDiscordId": "641295732384464906",
+    "ownerWallet": "0x2A61364e7CFC049b098Af00eCc115351522A8Cfa",
+}
+
+{
+    "nftAddress": "0xfF2f5342FF8fFfA17a04aA5CbC162001A25B71a7",
+    "ownerDiscordId": "641295732384464906",
+    "discordGuildId": "964899859113078845",
+    "ownerWalletAddress": "0x2A61364e7CFC049b098Af00eCc115351522A8Cfa",
+    "projectName": "PunkKub",
+    "totalSupply": "2222",
+    "symbol": "KPUNK",
+    "website": "https://punkkubnft.xyz",
+    "facebook": "",
+    "twitter": "",
+    "discordInviteLink": "https://discord.gg/kjk4AN4m",
+    "etherscan": "https://www.bkcscan.com/address/0xfF2f5342FF8fFfA17a04aA5CbC162001A25B71a7/read-contract",
+}
+
+
+{
+  "nftAddress": "0xfF2f5342FF8fFfA17a04aA5CbC162001A25B71a7",
+  "ownerDiscordId": "641295732384464906",
+  "discordGuildId": "964899859113078845",
+  "ownerWalletAddress": "0x2A61364e7CFC049b098Af00eCc115351522A8Cfa",
+  "projectName": "PunkKub",
+  "totalSupply": "2222",
+  "symbol": "KPUNK",
+  "website": "https://punkkubnft.xyz",
+  "facebook": "",
+  "twitter": "",
+  "discordInviteLink": "https://discord.gg/kjk4AN4m",
+  "etherscan": "https://www.bkcscan.com/address/0xfF2f5342FF8fFfA17a04aA5CbC162001A25B71a7/read-contract",
+  "planId": 1,
+  "roleName": "GANG-KPUNK"
+}

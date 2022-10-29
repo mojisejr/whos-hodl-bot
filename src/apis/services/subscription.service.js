@@ -15,7 +15,7 @@ const config = require("../../constants/database.config");
 const createNewSubscription = async (
   discordGuildId,
   ownerDiscordId,
-  ownerWallet,
+  ownerWalletAddress,
   planId,
   planPeriod,
   start
@@ -27,7 +27,7 @@ const createNewSubscription = async (
     defaults: {
       discordGuildId,
       ownerDiscordId,
-      ownerWallet,
+      ownerWalletAddress,
       planId,
       start,
       end,

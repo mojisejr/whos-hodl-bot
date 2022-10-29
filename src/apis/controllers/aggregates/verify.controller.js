@@ -5,14 +5,14 @@ const { getRolesByGuildId } = require("../../services/role.service");
 const { getProjectByGuild } = require("../../services/project.service");
 const { setRole } = require("../../../discord/handlers/role.handler");
 const { getContract } = require("../../../blockchain");
+const { parseDataObject } = require("../../utils/parseSqliteObject");
 
 const verifyHolder = catchAsync(async ({ body }, res) => {
-  //1 get wallet address, nftAddress
-
   const { walletAddress, discordId, discordGuildId } = body;
   const { nftAddress } = await getProjectByGuild(discordGuildId);
   const contract = getContract(nftAddress);
   const balance = (await contract.balanceOf(walletAddress)).toString();
+
   if (balance <= 0) {
     res.status(403).json({
       result: "Error",
@@ -28,12 +28,22 @@ const verifyHolder = catchAsync(async ({ body }, res) => {
       new Date().getTime(),
       true
     );
-    // ตรงนี้ ไม่ยอมทำงาน
-    const roleData = role[0].dataValues.role;
-    await setRole(client, discordGuildId, discordId, roleData);
 
+    const roleData = parseDataObject(role);
+    await setRole(client, discordGuildId, discordId, roleData.role);
+
+    const logs = {
+      nftAddress,
+      discordGuildId,
+      discordId,
+      balance,
+      role: roleData.role,
+    };
+
+    //response
     res.status(200).json({
       result: "OK",
+      data: logs,
     });
   }
 });
