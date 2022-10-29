@@ -30,7 +30,8 @@ const verifyHolder = catchAsync(async ({ body }, res) => {
     );
 
     const roleData = parseDataObject(role);
-    await setRole(client, discordGuildId, discordId, roleData.role);
+    console.log("role data", roleData[0].role);
+    await setRole(client, discordGuildId, discordId, roleData[0].role);
 
     const logs = {
       nftAddress,
